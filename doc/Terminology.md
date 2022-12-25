@@ -1,4 +1,4 @@
-﻿# Srotype -> serotype serovar, 血清型
+# Srotype -> serotype serovar, 血清型
 　ほかにgenotype (遺伝子型)、phenotype(表現型)は同意語として使用されている
 
 # MLST (Multi locus sequencing typing) 
