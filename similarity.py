@@ -1,42 +1,38 @@
 # 類似度計算
 import math
 
+def jaccard_similarity(pk1, pk2):
+    npk1, npk2 = _peak(pk1, d=1), _peak(pk2, d=1)
+    common = npk1.keys() & npk2.keys()
+    union  = npk1.keys() | npk2.keys()
 
-def similarity(pk1, pk2, method='jaccard'):
-    npk1, npk2 = _peak(pk1), _peak(pk2)
-    common =  npk1.keys() & npk2.keys()
-    diff1 = npk1.keys() - npk2.keys()
-    diff2 = npk2.keys() - npk1.keys()
-    diff  = diff1 | diff2
-    n_common, n_diff1, n_diff2 = len(common), len(diff1), len(diff2)
-    n = n_common + n_diff1 + n_diff2
-    
-    """cf. https://en.wikipedia.org/wiki/Rank_correlation
-    """
-    # spearman's rank correlation coefficient
-    if method == 'spearman':       
-        r1, r2 = _rank(npk1), _rank(npk2)
-        rnk = {k: (r1[k]-r2[k])**2 for k in common}
-        return 1 - sum(rnk.values())/float(n_common*(n_common-1))
-    
-    # kendall's rank correlation coefficient
-    if method == 'kendall':
-        return n_common / float(n)
-    
-    # defalut jaccard similarity
-    return n_common / float(n)
+    # n_common: # of co-occurent peaks
+    n_common, n_union = len(common), len(union)
 
-# m/zの値は正確ではないため、下記の関数で結果を丸める
-def _fmt(f, d=1):
-    """ 実数を整数に丸める。d:桁数 d桁以内四捨五入 
-       例：fmt(3456.78,d=1) == 3460, fmt(3456.78,d=2) == 3500
-    """
-    return round(int(f), -d)
+    return n_common / float(n_union)
+
+def rank_similarity(pk1, pk2, good_with=5):
+    npk1, npk2 = _peak(pk1, d=1), _peak(pk2, d=1)
+    common = npk1.keys() & npk2.keys()
+    union  = npk1.keys() | npk2.keys()
+    
+    # n_common = # of co-occurrent "good peak"s whose ranks in 2 series are close enough 
+    rpk1, rpk2 = _rank(npk1), _rank(npk2)
+    good_peak = lambda x: abs(rpk1[x]-rpk2[x]) < good_with
+    good_common = [good_peak(k) for k in common]
+    n_common, n_union = sum(good_common), len(union)
+    
+    return n_common / float(n_union)
+    
+"""cf. https://en.wikipedia.org/wiki/Rank_correlation
+"""
 
 def _peak(pk, d=1):
     """ Peaksのm/z値を丸め、辞書にして返す
+       実数を整数に丸める。d:桁数 d桁以内四捨五入 
+       例：_fmt(3456.78,d=1) == 3460, _fmt(3456.78,d=2) == 3500
     """
-    npk =  ([_fmt(x,d=d) for x in pk[0]],pk[1])
+    npk =  ([round(int(x), -d) for x in pk[0]],pk[1])
     return dict(zip(npk[0], npk[1]))
 
 def _rank(pk):
