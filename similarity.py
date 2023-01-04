@@ -16,7 +16,7 @@ def rank_similarity(pk1, pk2, good_with=5):
     common = npk1.keys() & npk2.keys()
     union  = npk1.keys() | npk2.keys()
     
-    # n_common = # of co-occurrent "good peak"s whose ranks in 2 series are close enough 
+    # n_common = # of co-occurrent "good" peaks whose ranks are close enough 
     rpk1, rpk2 = _rank(npk1), _rank(npk2)
     good_peak = lambda x: abs(rpk1[x]-rpk2[x]) < good_with
     good_common = [good_peak(k) for k in common]
