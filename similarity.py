@@ -23,7 +23,7 @@ def rank_similarity(pk1, pk2, good_with=5):
     n_common, n_union = sum(good_common), len(union)
     
     return n_common / float(n_union)
-    
+
 """cf. https://en.wikipedia.org/wiki/Rank_correlation
 """
 
