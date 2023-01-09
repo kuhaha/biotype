@@ -20,7 +20,7 @@ def rank_similarity(pk1, pk2, d=1, good_with=2, weighted=False):
     good_peak = lambda x: abs(rpk1[x]-rpk2[x]) < good_with
     if weighted:
         weight = lambda r: 1/float(r) # Reciprocal rank
-        good_weighted = [0.5+weight(rpk1[k])+weight(rpk2[k]) for k in common if good_peak(k)] 
+        good_weighted = [0.1+weight(rpk1[k])+weight(rpk2[k]) for k in common if good_peak(k)] 
 #         n1,n2 = len(rpk1), len(rpk2)
 #         weight = lambda r, n: 1-(r-1)/float(n) # Rank sum
 #         good_weighted = [0.5+weight(rpk1[k],n1)+weight(rpk2[k],n2) for k in common if good_peak(k)] 
