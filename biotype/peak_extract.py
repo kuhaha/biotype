@@ -39,9 +39,10 @@ def _peak(pk, g=1):
 
 
 def align(pk1, pk2, delta = 3):
-    """ align two peak lists, assign a pair of m/z values in different lists
-      an identical id if they are close enough (within `delta`) 
-      returns: dictionary for each peak list, dict item {m/z: peak_id}
+    """  transform list of <m/z, intensity> to that of <peak_id, intensity>    
+      assign an identical id to peaks in different peak lists
+       if their m/z values are close enough (within `delta`) 
+      returns: dictionaries for each peak <peak_id, intensity> 
     """
     dic_pk1 = dict(zip(pk1[0], pk1[1])) # a dict of {m/z: intensity} 
     dic_pk2 = dict(zip(pk2[0], pk2[1])) # a dict of {m/z: intensity} 
