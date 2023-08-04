@@ -20,6 +20,6 @@
 
 ## テストプログラム
 
-1. 実験1(`test1_peak_extraction.ipinb`)，ピーク抽出、pickleファイル保存を行うノートブック。
-2. 実験2(`test2_peak_alignment.ipinb`),ピークアライメントをテストするノートブック。
-3. 実験3(`test3_similarity.ipinb`), 各種類似度計算をテストするノートブック。
+1. 実験1(`test1_peak_extraction.ipynb`)，ピーク抽出、pickleファイル保存を行うノートブック。
+2. 実験2(`test2_peak_alignment.ipynb`),ピークアライメントをテストするノートブック。
+3. 実験3(`test3_similarity.ipynb`), 各種類似度計算をテストするノートブック。
