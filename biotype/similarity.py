@@ -17,7 +17,7 @@ def jaccard_similarity(pk1, pk2, delta=3):
       where two peaks coincidently occurring at the same m/z location are considered similar
     @parms 
       # d: number of digits to round up [NOT USED]
-      delta: threshold for idential peaks [NEW]
+      delta: threshold for identical peaks [NEW]
     """
     # npk1, npk2 = _peak(pk1, g=d), _peak(pk2, g=d)
     npk1, npk2 = pke.align(pk1, pk2, delta)
@@ -34,7 +34,7 @@ def rank_similarity(pk1, pk2, delta=3, good_with=2, weighted=False):
       where two jaccard simlilar peaks with approximate intesity ranks are considered similar
     @parms 
       d: number of digits to round up [NOT USED]
-      delta: threshold for idential peaks [NEW]
+      delta: threshold for identical peaks [NEW]
       good_with: how near two ranks should be so that they can be considered as coincident
       weighted: whether to weigh higher/lower ranks
     """
